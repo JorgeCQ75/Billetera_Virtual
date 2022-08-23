@@ -1,0 +1,58 @@
+﻿@*@{
+
+    ViewBag.Title = "tarjetas";
+}*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Tarjetero_Virtual</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Tarjetero_Virtual.styles.css" asp-append-version="true" />
+</head>
+ <header class="header">
+      <nav class="navbar navbar-light bg-white box-shadow justify-content-center align-items-center h-100">
+                <a class="navbar" style="margin-right:65px" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Imagenes/Iconos/tarjetas.png" style="width:40px; height:40px" /> </a>
+                <div class="navbar">
+                    <h4><label>TUS TARJETAS</label></h4>
+                    <ul class="navbar-nav">
+                        <li class="nav-item" style="margin-left:65px">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Agregar" asp-action="Index"><img src="~/Imagenes/Iconos/agregar.png" style="width:40px; height:40px" /></a>
+                        </li>
+                    </ul>
+                </div>
+        </nav>
+</header>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+</body>
+ <footer class="footer">
+     
+       <nav class="navbar navbar-light sticky-lg-top bg-white box-shadow justify-content-center align-items-center" style="height:102px">
+         @using (Html.BeginForm("buscar_tarjetas", "Home", FormMethod.Get))
+            {
+                    <div class="row">
+                       <div class="col-9">
+                           <input type="text" class="form-control" id="bancoxemisor" name="bancoxemisor" placeholder="">
+                       </div>
+                       <div class="col-3">
+                       <button type="submit" class="btn btn-outline-info" style="float:right">Buscar</button>
+                       </div>
+                  </div>
+            }
+            
+        </nav>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</html>

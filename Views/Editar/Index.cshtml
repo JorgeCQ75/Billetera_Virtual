@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+</head>
+
+
+<div class="container d-flex justify-content-center align-items-center h-100" style="">
+                @foreach (var item in @ViewBag.Tarjeta){
+                    <form method="post" action="@Url.Action("Update_tarjeta", "Editar")" enctype="multipart/form-data">
+                             <div class="card">
+                                <div class="card-header">
+                                   <h5 class="mb-0"><b>Editar Tarjeta</b></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <input hidden="hidden" name="id" value="@item.tar_id">
+                                        <div class="form-outline mb-2">
+                                            <input type="text" value="@item.tar_dueño" id="tar_dueño" name="tar_dueño" class="form-control" required />
+                                            <label class="form-label" for="tar_dueño">Dueño:</label>
+                                        </div>
+                                    
+                                        <div class="form-outline mb-2">
+                                            <input type="text" id="tar_numerotarjeta" value="@item.tar_numerotarjeta" name="tar_numerotarjeta" class="form-control" required />
+                                            <label class="form-label" for="tar_numerotarjeta">Número de tarjeta:</label>
+                                        </div>
+                                      <div class="form mb-2">
+                                        <input type="date" id="tar_fechaexpiracion" class="form-control" value="@item.tar_fechaexpiracion" name="tar_fechaexpiracion" placeholder="date">
+                                    </div>
+                                    </div>
+                                     <div class="card-footer">
+                                        <button type="submit" class="btn btn-success" style="float:right"><b>Guardar</b></button>
+                            </div>
+                    </form>
+
+                    }
+                    
+ </div>
+                    
+

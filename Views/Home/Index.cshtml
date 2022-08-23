@@ -1,0 +1,245 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+</head>
+<style>
+	* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: #ddeefc;
+	font-family: 'Lato', sans-serif;
+}
+
+.contenedor {
+	width: 100%;
+	max-width: 1000px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* ---------- Estilos Generales de las Tarjetas ----------*/
+.card {
+	width: 100%;
+	max-width: 320px;
+	position: relative;
+	color: #fff;
+	transition: .3s ease all;
+	transform: rotateY(0deg);
+	transform-style: preserve-3d;
+	cursor: pointer;
+	z-index: 2;
+}
+
+.card .active {
+	transform: rotateY(180deg);
+}
+
+.card > div {
+	padding: 10px;
+	border-radius: 15px 15px;
+	min-height: 120px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	box-shadow: 0 10px 10px 0 rgba(90,116,148,0.3);
+}
+
+/* ---------- Tarjeta Delantera ----------*/
+
+.card .delantera {
+	width: 100%;
+	background-image: url('Imagenes/Fondosdetarjetas/bg-tarjeta-02.jpg');
+	background-size: cover;
+}
+.delantera .logo-banco {
+	text-align: left;
+	min-height: 50px;
+
+}
+.delantera .logo-banco img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	max-width: 180px;
+	margin-top:-5%;
+}
+.delantera .logo-marca {
+	text-align: right;
+	min-height: 50px;
+}
+
+.delantera .logo-marca img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	max-width: 80px;
+	margin-top:-10%;
+}
+
+.delantera .grupo .label {
+	font-size: 13px;
+	color: #7d8994;
+	margin-bottom: 0px;
+	margin-top:-5%;
+}
+
+.delantera .grupo .numero,
+.delantera .grupo .nombre,
+.delantera .grupo .expiracion {
+	color: #fff;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+.delantera .flexbox {
+	display: flex;
+	justify-content: space-between;
+}
+.footer{
+	margin-top:auto;
+	text-align:center;
+	position:absolute;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: #f2f2f2;
+	font-family: 'Oswald', sans-serif;
+}
+
+.contenedor {
+	width: 350px;
+	height: 650px;
+	overflow: auto;
+	font-family: 'Open Sans';
+	border-radius: 4px;
+}
+
+.contenedor h1 {
+	font-size: 38px;
+	font-weight: 600;
+	color: #000;
+}
+
+.contenedor hr {
+	background: #ff9d00;
+	width: 20%;
+	height: 5px;
+	border: none;
+	margin: 20px 0;
+	border-radius: 50px;
+}
+
+p {
+	margin-bottom: 20px;
+	line-height: 28px;
+	font-size: 16px;
+	color: #414141;
+}
+
+
+.contenedor::-webkit-scrollbar {
+	width: 7px;
+}
+
+.contenedor::-webkit-scrollbar-thumb {
+	background: #ff9d00;
+	border-radius: 5px;
+}
+</style>
+       
+<body >
+<div class="contenedor d-flex justify-content-center align-items-center">
+			<div class="contenedor">
+                @foreach (var item in @ViewBag.TarjetaModel){ 
+						<a href="@Url.Action("Index", "Editar", new {tar_id=@item.tar_id})" class="list-group-item list-group-item-action" aria-current="true" style="height:170px; width:350px" onfocus="calcularmeses(@item.tar_id, @item.tar_calculo)">
+								<div class="card" id="tarjeta" style="width:320px; height:156px; margin-top:1%; border-radius: 15px 15px;" onclick="Edit(@item.tar_id)">
+								<div class="delantera">
+								<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" id="div_@item.tar_id" hidden="hidden">
+								<span class=""></span>
+								</span>
+                                <div class="flexbox">
+									<div class="logo-banco" id="logo-banco">
+									<img  src="@item.tar_fotobanco"/>
+									</div>
+									<div class="logo-marca" id="logo-marca">
+										<img src="@item.tar_fotoemisor" alt="">
+									</div>
+								</div>
+                               <div class="datos">
+								<div class="grupo" id="numero">
+									<p class="label">Número Tarjeta</p>
+									<p class="numero">**** **** **** @item.tar_ultimosd</p>
+								</div>
+								</div>
+								<div class="flexbox">
+								<div class="form-check form-switch">
+										@if (@item.tar_estado == "true")
+										{
+										 <input class="form-check-input" type="checkbox" role="status" id="span_@item.tar_id" checked  onclick="Save(@item.tar_id)">
+										}
+										else
+										{
+											 <input class="form-check-input" type="checkbox" role="status" id="span_@item.tar_id" onclick="Save(@item.tar_id)">
+										}
+								</div>
+								<div class="grupo" id="eliminar">
+									 <button type="button" id="btneliminar" class="btn btn-danger" style="float:right; width:45px; height:35px; margin-top:-10px" onclick="eliminar(@item.tar_id)"><img src="~/Imagenes/Iconos/basura.png" style="width:25px; height:25px; margin-left:-3px; margin-top:-5px" /></button>
+								</div>
+                            </div>
+							</div>
+							</div>
+						</a>
+							
+			}
+			</div>
+</div>				
+							
+
+</body>  
+
+<script  type="text/javascript">
+          function Save(tar_id) {  
+              debugger;
+						var api = new XMLHttpRequest();
+						api.open("GET", "/Home/Update_tarStatus?tar_id=" + tar_id + "&New_estado=" + document.querySelector("#span_"+tar_id).checked);
+						api.send();
+          }
+ </script>
+
+<script>
+
+function calcularmeses(tar_id,tar_calculo) {
+    var num = tar_id;
+    debugger;
+   if (tar_calculo >= -3) {
+			document.querySelector("#div_"+num).removeAttribute("hidden");
+
+   }
+}
+
+
+</script>
+<script>
+function eliminar(tar_id) {
+		var api = new XMLHttpRequest();
+					api.open("GET", "/Home/Delete_tarjeta?tar_id=" + tar_id);
+					api.send();
+                    alert('Tarjeta Elimina por favor recargue la página.')
+
+}
+</script>

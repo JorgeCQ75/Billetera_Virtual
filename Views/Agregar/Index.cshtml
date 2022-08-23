@@ -1,0 +1,71 @@
+﻿ @{
+    ViewData["Title"] = "Home Page";
+}
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Lato|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+</head>
+
+
+<div class="contenedor d-flex justify-content-center align-items-center h-100" style="">
+                    <form method="post" action="@Url.Action("Save", "Agregar")" enctype="multipart/form-data">
+                             <div class="card">
+                                <div class="card-header">
+                                   <h5 class="mb-0"><b>Nueva Tarjeta</b></h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-outline mb-2">
+                                            <input type="text" id="tar_dueño" name="tar_dueño" class="form-control" required />
+                                            <label class="form-label" for="tar_dueño">Dueño:</label>
+                                        </div>
+                                        <div class="form mb-2">
+                                      <label for="tar_banco">Banco:</label>
+                                        <select name="tar_banco" id="tar_banco">
+                                          <option value="Bcr">Bcr</option>
+                                          <option value="Promerica">Promerica</option>
+                                          <option value="Bac">Bac</option>
+                                        </select>
+                                    </div>
+                                        <div class="form mb-2">
+                                      <label for="tar_emisor">Emisor:</label>
+                                        <select name="tar_emisor" id="tar_emisor">
+                                          <option value="Visa">Visa</option>
+                                          <option value="Mastercard">Mastercard</option>
+                                           <option value="American Express">American Express</option>
+                                        </select>
+                                    </div>
+                                        <div class="form-outline mb-2">
+                                            <input type="text" id="tar_numerotarjeta" name="tar_numerotarjeta" class="form-control" required />
+                                            <label class="form-label" for="tar_numerotarjeta">Número de tarjeta:</label>
+                                        </div>
+                                        <div class="form-outline mb-2">
+                                            <input type="text" id="tar_ccv" name="tar_ccv" class="form-control" required />
+                                            <label class="form-label" for="tar_ccv">CCV:</label>
+                                        </div>
+                                      <div class="form mb-2">
+                                        <input type="date" id="tar_fechaexpiracion" required class="form-control" name="tar_fechaexpiracion" placeholder="date">
+                                    </div>
+                                     <div class="form mb-2">
+                                      <label for="tar_estado">Estado:</label>
+                                        <select name="tar_estado" id="tar_estado">
+                                          <option value="true">Activa</option>
+                                          <option value="false">Inactiva</option>
+                                        </select>
+                                    </div>
+                                          <div class="form-outline mb-2">
+                                            <div class="file-upload-wrapper">
+                                                <label> Foto fondo:</label>
+                                                <input type="file" id="tar_fotofondo" name="tar_fotofondo" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-success" style="float:right"><b>Agregar</b></button>
+                    </form>
+                    <form asp-controller="Agregar" asp-action="Index" method="post">
+                        <button type="submit" class="btn btn-danger" style="float:left"><b>Cancel</b></button>
+                    </form>
+
+                    </div>
+                </div>
