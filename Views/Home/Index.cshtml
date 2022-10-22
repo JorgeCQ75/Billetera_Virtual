@@ -58,7 +58,7 @@ body {
 
 .card .delantera {
 	width: 100%;
-	background-image: url('Imagenes/Fondosdetarjetas/bg-tarjeta-02.jpg');
+	background:url('/Imagenes/Fondosdetarjetas/bg-tarjeta-03.jpg');
 	background-size: cover;
 }
 .delantera .logo-banco {
@@ -135,14 +135,6 @@ body {
 	color: #000;
 }
 
-.contenedor hr {
-	background: #ff9d00;
-	width: 20%;
-	height: 5px;
-	border: none;
-	margin: 20px 0;
-	border-radius: 50px;
-}
 
 p {
 	margin-bottom: 20px;
@@ -162,17 +154,24 @@ p {
 }
 </style>
        
-<body >
+<body>
 <div class="contenedor d-flex justify-content-center align-items-center">
 			<div class="contenedor">
                 @foreach (var item in @ViewBag.TarjetaModel){ 
-						<a href="@Url.Action("Index", "Editar", new {tar_id=@item.tar_id})" class="list-group-item list-group-item-action" aria-current="true" style="height:170px; width:350px" onfocus="calcularmeses(@item.tar_id, @item.tar_calculo)">
-								<div class="card" id="tarjeta" style="width:320px; height:156px; margin-top:1%; border-radius: 15px 15px;" onclick="Edit(@item.tar_id)">
+						<a href="@Url.Action("Index", "Editar", new {tar_id=@item.tar_id})" class="list-group-item list-group-item-action" aria-current="true" style="height:170px; width:350px">
+								<div class="card" id="tarjeta" style=" width:320px; height:156px; margin-top:1%; border-radius: 15px 15px;" onclick="Edit(@item.tar_id)">
 								<div class="delantera">
-								<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" id="div_@item.tar_id" hidden="hidden">
-								<span class=""></span>
+									@if (@item.tar_calculo >=-3)
+									{
+										<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" id="div_@item.tar_id">
+										<span class=""></span>
 								</span>
-                                <div class="flexbox">
+							}
+							else
+							{
+								
+							}
+							<div class="flexbox">
 									<div class="logo-banco" id="logo-banco">
 									<img  src="@item.tar_fotobanco"/>
 									</div>
@@ -222,15 +221,6 @@ p {
  </script>
 
 <script>
-
-function calcularmeses(tar_id,tar_calculo) {
-    var num = tar_id;
-    debugger;
-   if (tar_calculo >= -3) {
-			document.querySelector("#div_"+num).removeAttribute("hidden");
-
-   }
-}
 
 
 </script>
