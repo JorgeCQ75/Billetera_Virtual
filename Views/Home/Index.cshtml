@@ -160,7 +160,7 @@ p {
                 @foreach (var item in @ViewBag.TarjetaModel){ 
 						<a href="@Url.Action("Index", "Editar", new {tar_id=@item.tar_id})" class="list-group-item list-group-item-action" aria-current="true" style="height:170px; width:350px">
 								<div class="card" id="tarjeta" style=" width:320px; height:156px; margin-top:1%; border-radius: 15px 15px;" onclick="Edit(@item.tar_id)">
-								<div class="delantera">
+								<div class="delantera"> 
 									@if (@item.tar_calculo >=-3)
 									{
 										<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" id="div_@item.tar_id">
